@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Completion Certificate | SafeStep</title>
+    <link rel="icon" href="assets/images/safestep-logo.png" type="image/png" />
+    <link rel="stylesheet" href="css/portal.css" />
+    <script src="js/portal.js" defer></script>
+  </head>
+  <body data-page="certificate" data-require-role="learner">
+    <a class="portal-skip" href="#portal-content">Skip to certificate</a>
+    <div class="portal-shell">
+      <aside class="portal-sidebar" aria-label="Learner navigation">
+        <a class="portal-brand" href="dashboard.html"
+          ><img
+            src="assets/images/safestep-logo.png"
+            alt="SafeStep logo"
+          /><span
+            ><strong>SafeStep</strong><small>Learner portal</small></span
+          ></a
+        >
+        <nav class="portal-nav">
+          <a href="dashboard.html"><span class="nav-icon">⌂</span>Dashboard</a>
+          <a href="dashboard.html#my-learning"
+            ><span class="nav-icon">▤</span>My Learning</a
+          >
+          <a href="certificate.html" aria-current="page"
+            ><span class="nav-icon">◆</span>Certificate</a
+          >
+          <a href="profile.html"><span class="nav-icon">●</span>Profile</a>
+          <a href="help.html"><span class="nav-icon">?</span>Help</a>
+        </nav>
+        <div class="portal-sidebar-footer">
+          <nav class="portal-nav">
+            <button type="button" data-logout>
+              <span class="nav-icon">↪</span>Log out
+            </button>
+          </nav>
+        </div>
+      </aside>
+      <main class="portal-main" id="portal-content">
+        <header class="portal-topbar">
+          <a class="portal-mobile-brand" href="dashboard.html"
+            ><img src="assets/images/safestep-logo.png" alt="" />SafeStep</a
+          >
+          <span class="portal-date" data-current-date></span>
+          <div class="portal-user">
+            <span class="portal-avatar" data-user-initials></span>
+            <div>
+              <strong data-user-name></strong><small data-user-role></small>
+            </div>
+          </div>
+          <button class="secondary topbar-logout" type="button" data-logout>
+            Log out
+          </button>
+        </header>
+        <div class="portal-content">
+          <header class="portal-page-title">
+            <div>
+              <span class="portal-kicker">Achievement unlocked</span>
+              <h1>Your certificate</h1>
+              <p>Rewarded after completing both SafeStep safety activities.</p>
+            </div>
+          </header>
+          <section
+            class="portal-card certificate-locked"
+            data-certificate-locked
+            hidden
+          >
+            <span class="stat-icon">◇</span>
+            <h2>Your certificate is still locked</h2>
+            <p>
+              Complete <strong data-remaining>2</strong> remaining safety
+              activities to unlock your reward certificate.
+            </p>
+            <a class="portal-button" href="dashboard.html#my-learning"
+              >Continue learning →</a
+            >
+          </section>
+          <section data-certificate-stage hidden>
+            <div class="certificate-stage">
+              <article
+                class="certificate-paper"
+                aria-label="SafeStep certificate of completion"
+              >
+                <div>
+                  <img
+                    class="certificate-logo"
+                    src="assets/images/safestep-logo.png"
+                    alt="SafeStep workplace safety logo"
+                  />
+                  <span class="portal-kicker">Laliguras SafeStep</span>
+                  <h1>Certificate of Completion</h1>
+                  <p>This certificate is proudly presented to</p>
+                  <strong
+                    class="certificate-name"
+                    data-certificate-name
+                  ></strong>
+                  <p>
+                    for successfully completing the SafeStep Safety Activities
+                  </p>
+                  <p>
+                    <strong
+                      >Warehouse Hazard Training · Working at Height</strong
+                    >
+                  </p>
+                  <span class="certificate-score" data-certificate-score
+                    >100%</span
+                  >
+                  <p>Overall programme result</p>
+                  <div class="certificate-signatures">
+                    <div>
+                      <strong data-certificate-date></strong><br />Date
+                      completed
+                    </div>
+                    <div>
+                      <strong>Team Laliguras</strong><br />SafeStep project team
+                    </div>
+                  </div>
+                  <p>Certificate ID: <strong data-certificate-id></strong></p>
+                </div>
+              </article>
+            </div>
+            <div class="certificate-actions">
+              <button type="button" data-print-certificate>
+                Print / Save PDF
+              </button>
+              <a class="portal-button secondary" href="dashboard.html"
+                >Back to dashboard</a
+              >
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

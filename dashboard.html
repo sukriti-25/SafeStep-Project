@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07553d" />
+    <title>Learner Dashboard | SafeStep</title>
+    <meta name="description" content="SafeStep learner training dashboard." />
+    <link rel="icon" href="assets/images/safestep-logo.png" type="image/png" />
+    <link rel="stylesheet" href="css/portal.css" />
+    <script src="js/portal.js" defer></script>
+  </head>
+  <body data-page="dashboard" data-require-role="learner">
+    <a class="portal-skip" href="#portal-content">Skip to dashboard</a>
+    <div class="portal-shell">
+      <aside class="portal-sidebar" aria-label="Learner navigation">
+        <a class="portal-brand" href="dashboard.html">
+          <img src="assets/images/safestep-logo.png" alt="SafeStep logo" />
+          <span><strong>SafeStep</strong><small>Learner portal</small></span>
+        </a>
+        <nav class="portal-nav">
+          <a href="dashboard.html" aria-current="page"
+            ><span class="nav-icon">⌂</span>Dashboard</a
+          >
+          <a href="dashboard.html#my-learning"
+            ><span class="nav-icon">▤</span>My Learning</a
+          >
+          <a href="certificate.html"
+            ><span class="nav-icon">◆</span>Certificate</a
+          >
+          <a href="profile.html"><span class="nav-icon">●</span>Profile</a>
+          <a href="help.html"><span class="nav-icon">?</span>Help</a>
+        </nav>
+        <div class="portal-sidebar-footer">
+          <nav class="portal-nav">
+            <button type="button" data-logout>
+              <span class="nav-icon">↪</span>Log out
+            </button>
+          </nav>
+          <p class="portal-sidebar-note">
+            Complete both safety activities to unlock your certificate.
+          </p>
+        </div>
+      </aside>
+      <main class="portal-main" id="portal-content">
+        <header class="portal-topbar">
+          <a class="portal-mobile-brand" href="dashboard.html"
+            ><img src="assets/images/safestep-logo.png" alt="" />SafeStep</a
+          >
+          <span class="portal-date" data-current-date></span>
+          <div class="portal-user">
+            <span class="portal-avatar" data-user-initials></span>
+            <div>
+              <strong data-user-name></strong><small data-user-role></small>
+            </div>
+          </div>
+          <button class="secondary topbar-logout" type="button" data-logout>
+            Log out
+          </button>
+        </header>
+        <div class="portal-content">
+          <section class="portal-welcome" aria-labelledby="welcome-title">
+            <span class="portal-kicker">Your SafeStep journey</span>
+            <h1 id="welcome-title">
+              Welcome back, <span data-user-first></span>!
+            </h1>
+            <p>
+              Continue learning, practise real workplace decisions and complete
+              both activities to earn your SafeStep certificate.
+            </p>
+          </section>
+
+          <section class="stats-grid" aria-label="Training summary">
+            <article class="stat-card">
+              <span class="stat-icon">▤</span>
+              <div class="stat-copy">
+                <span>Training progress</span>
+                <strong data-completed-count>0 / 2</strong>
+                <small>Activities completed</small>
+                <div class="progress-track" aria-hidden="true">
+                  <span data-overall-progress style="width: 0%"></span>
+                </div>
+              </div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon">◆</span>
+              <div class="stat-copy">
+                <span>Certificates</span>
+                <strong data-certificate-count>0</strong>
+                <small>Unlocked rewards</small>
+              </div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon">%</span>
+              <div class="stat-copy">
+                <span>Average result</span>
+                <strong data-average-score>0%</strong>
+                <small>Completed activities</small>
+              </div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon">◷</span>
+              <div class="stat-copy">
+                <span>Training time</span>
+                <strong data-training-time>0</strong>
+                <small>Minutes recorded</small>
+              </div>
+            </article>
+          </section>
+
+          <section id="my-learning" aria-labelledby="learning-title">
+            <div class="section-heading">
+              <div>
+                <h2 id="learning-title">My learning</h2>
+                <p>
+                  Complete both practical activities to unlock the certificate.
+                </p>
+              </div>
+            </div>
+            <div class="learning-grid">
+              <article class="learning-card" data-module-card="warehouse">
+                <div
+                  class="learning-visual warehouse"
+                  role="img"
+                  aria-label="Worker handling a box in a warehouse"
+                ></div>
+                <div class="learning-copy">
+                  <span class="status-badge" data-module-status
+                    >Not started</span
+                  >
+                  <h3>Warehouse Hazard Training</h3>
+                  <p>
+                    Identify manual handling, access, storage and emergency
+                    route hazards.
+                  </p>
+                  <div class="module-meta">
+                    <span>4 hazards</span><span>3 questions</span
+                    ><span>120 sec</span>
+                  </div>
+                  <div class="progress-track">
+                    <span data-module-progress style="width: 0%"></span>
+                  </div>
+                  <div class="learning-actions">
+                    <strong data-module-percent>0%</strong>
+                    <a
+                      class="portal-button"
+                      data-module-action
+                      href="assets/training/safestep-360/index.html?module=warehouse"
+                      >Start activity →</a
+                    >
+                  </div>
+                </div>
+              </article>
+              <article class="learning-card" data-module-card="height">
+                <div
+                  class="learning-visual height"
+                  role="img"
+                  aria-label="Mountain inspired work at height training artwork"
+                ></div>
+                <div class="learning-copy">
+                  <span class="status-badge" data-module-status
+                    >Not started</span
+                  >
+                  <h3>Working at Height</h3>
+                  <p>
+                    Recognise ladder, open-edge, scaffold and falling-object
+                    risks.
+                  </p>
+                  <div class="module-meta">
+                    <span>4 hazards</span><span>3 questions</span
+                    ><span>120 sec</span>
+                  </div>
+                  <div class="progress-track">
+                    <span data-module-progress style="width: 0%"></span>
+                  </div>
+                  <div class="learning-actions">
+                    <strong data-module-percent>0%</strong>
+                    <a
+                      class="portal-button"
+                      data-module-action
+                      href="assets/training/safestep-360/index.html?module=height"
+                      >Start activity →</a
+                    >
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="dashboard-lower">
+            <article
+              class="portal-card certificate-teaser"
+              data-certificate-teaser
+            >
+              <span class="portal-kicker">Reward certificate</span>
+              <h3>Certificate progress</h3>
+              <p>
+                Complete both activities to unlock your SafeStep certificate.
+              </p>
+              <a class="portal-button secondary" href="#my-learning"
+                >Continue learning →</a
+              >
+              <span class="certificate-seal-small" aria-hidden="true">◆</span>
+            </article>
+            <article class="portal-card">
+              <h3>Recent activity</h3>
+              <div class="activity-list" data-activity-list></div>
+            </article>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

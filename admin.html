@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Administrator Dashboard | SafeStep</title>
+    <link rel="icon" href="assets/images/safestep-logo.png" type="image/png" />
+    <link rel="stylesheet" href="css/portal.css" />
+    <script src="js/portal.js" defer></script>
+  </head>
+  <body data-page="admin" data-require-role="admin">
+    <a class="portal-skip" href="#portal-content"
+      >Skip to administrator dashboard</a
+    >
+    <div class="portal-shell">
+      <aside class="portal-sidebar" aria-label="Administrator navigation">
+        <a class="portal-brand" href="admin.html"
+          ><img
+            src="assets/images/safestep-logo.png"
+            alt="SafeStep logo"
+          /><span
+            ><strong>SafeStep</strong><small>Administrator portal</small></span
+          ></a
+        >
+        <nav class="portal-nav">
+          <a href="admin.html" aria-current="page"
+            ><span class="nav-icon">⌂</span>Overview</a
+          >
+          <a href="#learners"><span class="nav-icon">●</span>Learners</a>
+          <a href="#reports"><span class="nav-icon">▥</span>Reports</a>
+          <a href="services.html"><span class="nav-icon">◎</span>Platform</a>
+          <a href="contact.html"><span class="nav-icon">?</span>Support</a>
+        </nav>
+        <div class="portal-sidebar-footer">
+          <nav class="portal-nav">
+            <button type="button" data-logout>
+              <span class="nav-icon">↪</span>Log out
+            </button>
+          </nav>
+          <p class="portal-sidebar-note">
+            Prototype administrator controls for reviewing learner completion.
+          </p>
+        </div>
+      </aside>
+      <main class="portal-main" id="portal-content">
+        <header class="portal-topbar">
+          <a class="portal-mobile-brand" href="admin.html"
+            ><img src="assets/images/safestep-logo.png" alt="" />SafeStep
+            Admin</a
+          >
+          <span class="portal-date" data-current-date></span>
+          <div class="portal-user">
+            <span class="portal-avatar" data-user-initials></span>
+            <div>
+              <strong data-user-name></strong><small data-user-role></small>
+            </div>
+          </div>
+          <button class="secondary topbar-logout" type="button" data-logout>
+            Log out
+          </button>
+        </header>
+        <div class="portal-content">
+          <section class="portal-welcome" aria-labelledby="admin-title">
+            <span class="portal-kicker">Administrator overview</span>
+            <h1 id="admin-title">Training <span>control centre</span></h1>
+            <p>
+              Review learner progress, percentage results and certificate
+              eligibility across the SafeStep prototype.
+            </p>
+          </section>
+          <section class="stats-grid" aria-label="Administrator statistics">
+            <article class="stat-card">
+              <span class="stat-icon">●</span>
+              <div class="stat-copy">
+                <span>Total learners</span><strong data-admin-learners>0</strong
+                ><small>Registered prototype accounts</small>
+              </div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon">◆</span>
+              <div class="stat-copy">
+                <span>Certificates earned</span
+                ><strong data-admin-certified>0</strong
+                ><small>Both activities complete</small>
+              </div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon">%</span>
+              <div class="stat-copy">
+                <span>Completion rate</span><strong data-admin-rate>0%</strong
+                ><small>Certified learners</small>
+              </div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon">▤</span>
+              <div class="stat-copy">
+                <span>Available activities</span><strong>2</strong
+                ><small>Warehouse and height</small>
+              </div>
+            </article>
+          </section>
+          <section class="portal-card" id="learners">
+            <div class="section-heading">
+              <div>
+                <h2>Learner progress</h2>
+                <p>Live results stored in this browser.</p>
+              </div>
+            </div>
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Learner</th>
+                    <th>Organisation</th>
+                    <th>Warehouse</th>
+                    <th>Height</th>
+                    <th>Progress</th>
+                    <th>Average</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody data-admin-table></tbody>
+              </table>
+            </div>
+          </section>
+          <section class="admin-grid" id="reports">
+            <article class="portal-card">
+              <h2>Training programme</h2>
+              <div class="admin-summary">
+                <div class="mini-stat">
+                  <span>Hazards per activity</span><strong>4</strong>
+                </div>
+                <div class="mini-stat">
+                  <span>Questions per activity</span><strong>3</strong>
+                </div>
+                <div class="mini-stat">
+                  <span>Maximum result</span><strong>100%</strong>
+                </div>
+              </div>
+              <p>
+                Results are converted from 70 raw points into an easy-to-read
+                percentage. The certificate unlocks only after both required
+                activities are completed.
+              </p>
+            </article>
+            <aside class="portal-card">
+              <h2>Prototype data</h2>
+              <p>
+                Accounts and progress are stored locally in this browser for
+                demonstration. Reset clears an individual learner's two activity
+                results.
+              </p>
+              <a class="portal-button secondary" href="login.html?switch=1"
+                >Switch account</a
+              >
+            </aside>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

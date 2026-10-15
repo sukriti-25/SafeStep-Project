@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07553d" />
+    <title>Sign In | SafeStep</title>
+    <meta
+      name="description"
+      content="Sign in to the SafeStep learner or administrator training portal."
+    />
+    <link rel="icon" href="assets/images/safestep-logo.png" type="image/png" />
+    <link rel="stylesheet" href="css/portal.css" />
+    <script src="js/portal.js" defer></script>
+  </head>
+  <body data-page="login">
+    <a class="portal-skip" href="#login-form">Skip to sign in</a>
+    <main class="login-page">
+      <section class="login-visual" aria-labelledby="login-hero-title">
+        <a class="login-brand" href="index.html">
+          <img
+            src="assets/images/safestep-logo.png"
+            alt="SafeStep workplace safety logo"
+            width="1536"
+            height="1536"
+          />
+          <span><strong>SafeStep</strong><small>by Laliguras</small></span>
+        </a>
+        <div class="login-hero-copy">
+          <span class="portal-kicker">Training for a safer tomorrow</span>
+          <h1>Learn. Practise. <span>Stay safe.</span></h1>
+          <p>
+            Continue your workplace safety journey, complete both interactive
+            activities, track your percentage results and earn your SafeStep
+            certificate.
+          </p>
+        </div>
+        <div class="login-points" aria-label="SafeStep benefits">
+          <span>✓ Interactive activities</span>
+          <span>✓ Percentage results</span>
+          <span>✓ Completion certificate</span>
+        </div>
+      </section>
+      <section class="login-panel" aria-labelledby="sign-in-title">
+        <div class="login-card">
+          <span class="portal-kicker">Secure prototype portal</span>
+          <h2 id="sign-in-title">Welcome back</h2>
+          <p>
+            Choose your account type and sign in to access the correct
+            dashboard.
+          </p>
+          <div data-existing-session hidden>
+            <a class="portal-button green" data-continue-session href="#"
+              >Continue current session</a
+            >
+          </div>
+          <div class="role-tabs" role="tablist" aria-label="Account type">
+            <button
+              class="role-tab"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              data-role-tab="learner"
+            >
+              Learner
+            </button>
+            <button
+              class="role-tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-role-tab="admin"
+            >
+              Administrator
+            </button>
+          </div>
+          <form class="login-form" id="login-form" data-login-form novalidate>
+            <input type="hidden" name="role" value="learner" />
+            <div class="login-field">
+              <label for="login-email">Email address</label>
+              <input
+                id="login-email"
+                name="email"
+                type="email"
+                autocomplete="username"
+                required
+                placeholder="name@company.com"
+              />
+            </div>
+            <div class="login-field">
+              <label for="login-password">Password</label>
+              <input
+                id="login-password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required
+                placeholder="Enter your password"
+              />
+            </div>
+            <p class="login-error" role="alert" data-login-error></p>
+            <button class="login-submit" type="submit">Sign in →</button>
+          </form>
+          <div class="demo-account" data-demo-credentials></div>
+          <button class="demo-fill" type="button" data-demo-fill>
+            Fill demo credentials
+          </button>
+          <p>
+            <a href="index.html">← Return to the SafeStep website</a>
+          </p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Help & Support | SafeStep</title>
+    <link rel="icon" href="assets/images/safestep-logo.png" type="image/png" />
+    <link rel="stylesheet" href="css/portal.css" />
+    <script src="js/portal.js" defer></script>
+  </head>
+  <body data-page="help" data-require-role="learner">
+    <a class="portal-skip" href="#portal-content">Skip to help</a>
+    <div class="portal-shell">
+      <aside class="portal-sidebar" aria-label="Learner navigation">
+        <a class="portal-brand" href="dashboard.html"
+          ><img
+            src="assets/images/safestep-logo.png"
+            alt="SafeStep logo"
+          /><span
+            ><strong>SafeStep</strong><small>Learner portal</small></span
+          ></a
+        >
+        <nav class="portal-nav">
+          <a href="dashboard.html"><span class="nav-icon">⌂</span>Dashboard</a>
+          <a href="dashboard.html#my-learning"
+            ><span class="nav-icon">▤</span>My Learning</a
+          >
+          <a href="certificate.html"
+            ><span class="nav-icon">◆</span>Certificate</a
+          >
+          <a href="profile.html"><span class="nav-icon">●</span>Profile</a>
+          <a href="help.html" aria-current="page"
+            ><span class="nav-icon">?</span>Help</a
+          >
+        </nav>
+        <div class="portal-sidebar-footer">
+          <nav class="portal-nav">
+            <button type="button" data-logout>
+              <span class="nav-icon">↪</span>Log out
+            </button>
+          </nav>
+        </div>
+      </aside>
+      <main class="portal-main" id="portal-content">
+        <header class="portal-topbar">
+          <a class="portal-mobile-brand" href="dashboard.html"
+            ><img src="assets/images/safestep-logo.png" alt="" />SafeStep</a
+          >
+          <span class="portal-date" data-current-date></span>
+          <div class="portal-user">
+            <span class="portal-avatar" data-user-initials></span>
+            <div>
+              <strong data-user-name></strong><small data-user-role></small>
+            </div>
+          </div>
+          <button class="secondary topbar-logout" type="button" data-logout>
+            Log out
+          </button>
+        </header>
+        <div class="portal-content">
+          <header class="portal-page-title">
+            <div>
+              <span class="portal-kicker">Help centre</span>
+              <h1>Help & support</h1>
+              <p>
+                Answers for training, results, certificates and account access.
+              </p>
+            </div>
+          </header>
+          <div class="help-grid">
+            <section class="faq-list" aria-label="Frequently asked questions">
+              <details class="faq-item" open>
+                <summary>How do I start a training activity?</summary>
+                <p>
+                  Open My Learning from the dashboard and select Start activity.
+                  Read the module brief, begin the scenario, find all four
+                  hazards, then complete the three-question assessment.
+                </p>
+              </details>
+              <details class="faq-item">
+                <summary>How are my marks calculated?</summary>
+                <p>
+                  Each activity awards up to 70 raw points: 40 for finding four
+                  hazards and 30 for three assessment answers. SafeStep converts
+                  the result into a percentage, so 70 points appears as 100%.
+                </p>
+              </details>
+              <details class="faq-item">
+                <summary>How do I earn my certificate?</summary>
+                <p>
+                  Complete both Warehouse Hazard Training and Working at Height.
+                  After both are finished, your certificate unlocks
+                  automatically in the learner dashboard.
+                </p>
+              </details>
+              <details class="faq-item">
+                <summary>Can I repeat an activity?</summary>
+                <p>
+                  Yes. Select Repeat activity from the result screen or learner
+                  dashboard. Your newest result replaces the previous result for
+                  that activity.
+                </p>
+              </details>
+              <details class="faq-item">
+                <summary>How do I save or download my certificate?</summary>
+                <p>
+                  Open the certificate page and choose Print / Save PDF. In the
+                  browser print window, select Save as PDF to download a copy.
+                </p>
+              </details>
+              <details class="faq-item">
+                <summary>Where is my progress stored?</summary>
+                <p>
+                  This student prototype stores account and progress information
+                  only in this browser. Clearing browser storage resets the
+                  prototype data.
+                </p>
+              </details>
+            </section>
+            <aside class="portal-card support-card">
+              <span class="stat-icon">✉</span>
+              <h2>Still need help?</h2>
+              <p>
+                Contact the Laliguras project team for prototype support or
+                questions about SafeStep.
+              </p>
+              <a class="portal-button" href="mailto:ishanbhan61@gmail.com"
+                >Email support</a
+              >
+              <p><small>ishanbhan61@gmail.com</small></p>
+            </aside>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

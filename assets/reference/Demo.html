@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SafeSphere | Interactive Safety Training</title>
+
+<style>
+/* ================= GLOBAL ================= */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+}
+
+h1, h2, h3 {
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    background: #00e5ff;
+    color: #000;
+}
+
+.hidden { display: none; }
+
+/* ================= HEADER ================= */
+header {
+    background: rgba(0,0,0,0.4);
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.score-box {
+    background: rgba(255,255,255,0.1);
+    padding: 10px 16px;
+    border-radius: 10px;
+}
+
+/* ================= CONTAINERS ================= */
+section {
+    padding: 40px;
+    text-align: center;
+}
+
+/* ================= CARDS ================= */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.card {
+    background: rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 16px;
+    transition: transform 0.3s;
+}
+
+.card:hover { transform: translateY(-6px); }
+
+/* ================= SCENE ================= */
+.scene-container {
+    margin: 20px auto;
+    width: 90%;
+    height: 420px;
+    background: url('https://i.imgur.com/7G7I6Wf.jpg') center/cover no-repeat;
+    border-radius: 20px;
+    border: 3px solid #00e5ff;
+    position: relative;
+}
+
+.hazard {
+    width: 28px;
+    height: 28px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+
+/* ================= QUIZ ================= */
+.quiz-box {
+    max-width: 600px;
+    margin: auto;
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 16px;
+}
+
+.option {
+    margin: 10px 0;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    padding: 15px;
+    text-align: center;
+    opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>🛡 SafeSphere Interactive Training</h2>
+    <div class="score-box">
+        Score: <span id="score">0</span> | Time: <span id="timer">60</span>s
+    </div>
+</header>
+
+<!-- ========== PAGE 1: WELCOME ========== -->
+<section id="welcome">
+    <h1>Welcome to SafeSphere</h1>
+    <p>Interactive Health & Safety Training for Logistics and Warehousing</p>
+    <button onclick="goTo('dashboard')">Enter Training Platform</button>
+</section>
+
+<!-- ========== PAGE 2: DASHBOARD ========== -->
+<section id="dashboard" class="hidden">
+    <h1>Training Dashboard</h1>
+    <p>Select a module to begin your training.</p>
+
+    <div class="card-container">
+        <div class="card">
+            <h3>📦 Warehouse Hazard Training</h3>
+            <p>Identify hazards in a simulated 360° environment.</p>
+            <button onclick="goTo('scenario')">Start</button>
+        </div>
+
+        <div class="card">
+            <h3>🧗 Working at Height</h3>
+            <p>Risk awareness training (prototype placeholder).</p>
+        </div>
+
+        <div class="card">
+            <h3>🖥 Cyber Awareness</h3>
+            <p>Safe working practices and phishing awareness.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PAGE 3: SCENARIO INFO ========== -->
+<section id="scenario" class="hidden">
+    <h1>Warehouse Safety Scenario</h1>
+    <p>You will identify unsafe acts and hazards within a time limit.</p>
+    <button onclick="startTraining()">Begin Scenario</button>
+</section>
+
+<!-- ========== PAGE 4: 360 SCENE ========== -->
+<section id="scene" class="hidden">
+    <h1>360° Training Scene</h1>
+
+    <div class="scene-container">
+        <div class="hazard" style="top:65%; left:25%;" onclick="findHazard(this)"></div>
+        <div class="hazard" style="top:40%; left:55%;" onclick="findHazard(this)"></div>
+        <div class="hazard" style="top:70%; left:75%;" onclick="findHazard(this)"></div>
+    </div>
+
+    <p id="feedback"></p>
+</section>
+
+<!-- ========== PAGE 5: QUIZ ========== -->
+<section id="quiz" class="hidden">
+    <h1>Knowledge Check</h1>
+
+    <div class="quiz-box">
+        <p><strong>What should you do if you identify a hazard?</strong></p>
+
+        <div class="option" onclick="answer(true)">Report it immediately</div>
+        <div class="option" onclick="answer(false)">Ignore it</div>
+        <div class="option" onclick="answer(false)">Fix it without permission</div>
+    </div>
+</section>
+
+<!-- ========== PAGE 6: COMPLETION ========== -->
+<section id="completion" class="hidden">
+    <h1>✅ Training Completed</h1>
+    <p>Well done! You have completed the scenario.</p>
+    <h2>Final Score: <span id="finalScore"></span></h2>
+    <button onclick="location.reload()">Return to Start</button>
+</section>
+
+<footer>
+    Prototype for CET257 Enterprise Project – A6 Design Prototypes
+</footer>
+
+<script>
+let score = 0;
+let hazards = 0;
+let timeLeft = 60;
+let timer;
+
+function goTo(id) {
+    document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
+}
+
+function startTraining() {
+    goTo("scene");
+    startTimer();
+}
+
+function findHazard(el) {
+    el.style.display = "none";
+    score += 10;
+    hazards++;
+    document.getElementById("score").innerText = score;
+    document.getElementById("feedback").innerText = "✔ Hazard identified";
+
+    if (hazards === 3) {
+        clearInterval(timer);
+        goTo("quiz");
+    }
+}
+
+function startTimer() {
+    timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            goTo("quiz");
+        }
+    }, 1000);
+}
+
+function answer(correct) {
+    if (correct) score += 10;
+    document.getElementById("finalScore").innerText = score;
+    goTo("completion");
+}
+</script>
+
+</body>
+</html>

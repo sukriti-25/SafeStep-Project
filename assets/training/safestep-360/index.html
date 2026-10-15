@@ -1,0 +1,1700 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SafeStep | Interactive Health & Safety Training</title>
+    <link rel="icon" href="../../images/safestep-logo.png" type="image/png" />
+    <style>
+      :root {
+        --g: #0b4f3a;
+        --g2: #176b4b;
+        --r: #a9143d;
+        --bg: #f5f8f5;
+        --line: #dbe6df;
+        --ink: #10251e;
+        --muted: #63746d;
+        --soft: #edf6f0;
+        --amber: #b57b16;
+        --shadow: 0 18px 48px #0b4f3a16;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          Segoe UI,
+          Arial,
+          sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+      }
+      button,
+      input {
+        font: inherit;
+      }
+      button {
+        border: 0;
+        border-radius: 11px;
+        padding: 13px 20px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      .primary {
+        background: var(--g);
+        color: white;
+      }
+      .primary:hover {
+        background: #083f2e;
+      }
+      .secondary {
+        background: white;
+        border: 1px solid var(--line);
+        color: var(--g);
+      }
+      .secondary:hover {
+        background: #f7faf8;
+      }
+      header {
+        min-height: 72px;
+        background: white;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 10px 5%;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        white-space: nowrap;
+      }
+      .brand img {
+        height: 48px;
+        width: auto;
+        display: block;
+      }
+      .brand-text {
+        font-size: 1.05rem;
+        font-weight: 900;
+        color: var(--g);
+        line-height: 1.1;
+      }
+      .brand-text span {
+        color: var(--r);
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .score {
+        background: var(--soft);
+        color: var(--g);
+        padding: 10px 16px;
+        border-radius: 20px;
+        font-weight: 800;
+      }
+      .ghost {
+        background: #fff;
+        color: var(--g);
+        border: 1px solid var(--line);
+        padding: 9px 13px;
+      }
+      main {
+        max-width: 1180px;
+        margin: auto;
+        padding: 42px 4% 70px;
+      }
+      .hidden {
+        display: none !important;
+      }
+      h1 {
+        font-size: clamp(2.4rem, 6vw, 4.5rem);
+        line-height: 1;
+        letter-spacing: -0.045em;
+        margin: 8px 0 18px;
+      }
+      h1 span {
+        color: #28704e;
+      }
+      h2 {
+        font-size: 2rem;
+        margin: 8px 0 12px;
+      }
+      h3 {
+        margin: 8px 0 10px;
+      }
+      p {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+      .eyebrow {
+        color: var(--r);
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 40px;
+        align-items: center;
+        min-height: 68vh;
+      }
+      .card {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+      .steps {
+        display: grid;
+        gap: 14px;
+        margin-top: 22px;
+      }
+      .step {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .step b {
+        background: var(--soft);
+        color: var(--g);
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        flex: none;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-top: 25px;
+      }
+      .module {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        min-height: 290px;
+        box-shadow: 0 10px 28px #0b4f3a0d;
+      }
+      .module h3 {
+        font-size: 1.15rem;
+      }
+      .module p {
+        flex: 1;
+      }
+      .module-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.72rem;
+        background: var(--soft);
+        color: var(--g);
+        padding: 6px 10px;
+        border-radius: 20px;
+        font-weight: 800;
+        width: max-content;
+      }
+      .badge.soon {
+        background: #fff5df;
+        color: #8a5a08;
+      }
+      .badge.available:before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #31a36b;
+      }
+      .badge.soon:before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #d39b31;
+      }
+      .meta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 10px 0 0;
+      }
+      .meta span {
+        font-size: 0.78rem;
+        background: #f5f8f6;
+        border: 1px solid var(--line);
+        padding: 6px 9px;
+        border-radius: 999px;
+        color: #52645c;
+      }
+      .brief-grid {
+        display: grid;
+        grid-template-columns: 1fr 0.8fr;
+        gap: 20px;
+      }
+      .brief-list {
+        display: grid;
+        gap: 11px;
+        margin: 18px 0;
+      }
+      .brief-item {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .brief-item i {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--soft);
+        color: var(--g);
+        display: grid;
+        place-items: center;
+        font-style: normal;
+        font-weight: 900;
+        flex: none;
+      }
+      .notice {
+        background: #fff8e8;
+        border: 1px solid #f0d9a6;
+        border-radius: 14px;
+        padding: 14px;
+        color: #775113;
+      }
+      .scenebox {
+        background: #09261d;
+        padding: 13px;
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+      }
+      .scenehead {
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 7px 5px 13px;
+        align-items: center;
+      }
+      .scenehead small {
+        color: #bdd0c5;
+      }
+      .scene {
+        height: 520px;
+        border-radius: 17px;
+        position: relative;
+        overflow: hidden;
+        cursor: grab;
+        transition: transform 0.35s;
+        transform-origin: center;
+      }
+      .scene:active {
+        cursor: grabbing;
+      }
+      .controls {
+        text-align: center;
+        margin-top: 12px;
+        display: flex;
+        justify-content: center;
+        gap: 7px;
+        flex-wrap: wrap;
+      }
+      .control {
+        background: #173c2f;
+        color: white;
+        margin: 3px;
+      }
+      .feedback {
+        background: white;
+        border-radius: 13px;
+        padding: 14px;
+        margin-top: 12px;
+        color: var(--g);
+        font-weight: 750;
+        min-height: 48px;
+        line-height: 1.45;
+      }
+      .hot {
+        position: absolute;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--r);
+        color: white;
+        border: 3px solid white;
+        z-index: 8;
+        animation: pulse 1.5s infinite;
+        box-shadow: 0 0 0 0 #a9143d33;
+      }
+      .hot.done {
+        background: #28704e;
+        animation: none;
+      }
+      @keyframes pulse {
+        50% {
+          box-shadow: 0 0 0 11px #a9143d1d;
+        }
+      }
+      .scene-label {
+        position: absolute;
+        left: 16px;
+        top: 14px;
+        background: #ffffffdd;
+        color: #163a2d;
+        padding: 8px 10px;
+        border-radius: 9px;
+        font-size: 0.74rem;
+        font-weight: 800;
+        z-index: 9;
+      }
+
+      /* Warehouse scene */
+      .warehouse-scene {
+        background: linear-gradient(
+          180deg,
+          #dbe7e1 0 30%,
+          #88958e 30% 31%,
+          #6e7872 31% 68%,
+          #cbbd9f 68%
+        );
+      }
+      .warehouse-scene:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 34%;
+        background: linear-gradient(165deg, transparent 49%, #b5a37e 50%);
+        opacity: 0.45;
+      }
+      .rack {
+        position: absolute;
+        bottom: 115px;
+        width: 170px;
+        height: 250px;
+        border: 13px solid #46564e;
+        background: repeating-linear-gradient(#0000 0 45px, #46564e 46px 57px);
+        z-index: 1;
+      }
+      .r1 {
+        left: 7%;
+      }
+      .r2 {
+        right: 7%;
+      }
+      .box {
+        position: absolute;
+        width: 62px;
+        height: 45px;
+        background: #a97848;
+        border: 3px solid #72502f;
+        z-index: 2;
+      }
+      .b1 {
+        left: 14%;
+        bottom: 170px;
+      }
+      .b2 {
+        right: 15%;
+        bottom: 185px;
+      }
+      .b3 {
+        right: 19%;
+        bottom: 220px;
+      }
+      .worker {
+        position: absolute;
+        left: 46%;
+        bottom: 105px;
+        width: 100px;
+        z-index: 2;
+      }
+      .head {
+        width: 52px;
+        height: 52px;
+        background: #c78b68;
+        border-radius: 50%;
+        margin: auto;
+        border: 5px solid #e7aa21;
+      }
+      .body {
+        height: 100px;
+        width: 70px;
+        background: #e3a61d;
+        border-radius: 17px;
+        margin: auto;
+      }
+      .legs {
+        width: 62px;
+        height: 55px;
+        margin: auto;
+        border-left: 21px solid #243b32;
+        border-right: 21px solid #243b32;
+      }
+      .spill {
+        position: absolute;
+        left: 26%;
+        bottom: 43px;
+        width: 135px;
+        height: 38px;
+        border-radius: 50%;
+        background: #4f91a8aa;
+        z-index: 2;
+      }
+      .exit {
+        position: absolute;
+        right: 40%;
+        top: 30px;
+        background: #285a47;
+        color: white;
+        width: 90px;
+        height: 105px;
+        text-align: center;
+        padding-top: 20px;
+        font-weight: 900;
+        z-index: 1;
+      }
+      .wh1 {
+        left: 25%;
+        bottom: 45px;
+      }
+      .wh2 {
+        left: 45%;
+        bottom: 100px;
+      }
+      .wh3 {
+        right: 39%;
+        top: 22px;
+      }
+      .wh4 {
+        right: 12%;
+        bottom: 178px;
+      }
+
+      /* Working at height scene */
+      .height-scene {
+        background: linear-gradient(
+          180deg,
+          #cfe0e8 0 38%,
+          #b9c7c0 38% 39%,
+          #8b9891 39% 67%,
+          #d0c5aa 67%
+        );
+      }
+      .height-scene .building {
+        position: absolute;
+        right: 3%;
+        top: 80px;
+        width: 47%;
+        height: 340px;
+        background: #d7ddd9;
+        border: 8px solid #6d7972;
+        z-index: 1;
+      }
+      .height-scene .roof {
+        position: absolute;
+        right: 1%;
+        top: 64px;
+        width: 51%;
+        height: 30px;
+        background: #4e5a54;
+        z-index: 3;
+      }
+      .height-scene .edge-worker {
+        position: absolute;
+        right: 22%;
+        top: 85px;
+        width: 70px;
+        z-index: 5;
+      }
+      .height-scene .edge-worker .head {
+        width: 38px;
+        height: 38px;
+        border: 4px solid #e7aa21;
+      }
+      .height-scene .edge-worker .body {
+        width: 50px;
+        height: 76px;
+      }
+      .height-scene .edge-worker .legs {
+        width: 44px;
+        height: 42px;
+        border-left-width: 15px;
+        border-right-width: 15px;
+      }
+      .ladder {
+        position: absolute;
+        left: 13%;
+        bottom: 70px;
+        width: 70px;
+        height: 320px;
+        transform: rotate(12deg);
+        z-index: 3;
+      }
+      .ladder:before,
+      .ladder:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 9px;
+        background: #a9b0ad;
+      }
+      .ladder:before {
+        left: 5px;
+      }
+      .ladder:after {
+        right: 5px;
+      }
+      .rung {
+        position: absolute;
+        left: 7px;
+        right: 7px;
+        height: 6px;
+        background: #a9b0ad;
+      }
+      .scaffold {
+        position: absolute;
+        left: 42%;
+        bottom: 82px;
+        width: 260px;
+        height: 275px;
+        z-index: 2;
+        border-left: 12px solid #4c5e55;
+        border-right: 12px solid #4c5e55;
+      }
+      .scaffold:before,
+      .scaffold:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 12px;
+        background: #4c5e55;
+      }
+      .scaffold:before {
+        top: 70px;
+      }
+      .scaffold:after {
+        top: 190px;
+      }
+      .platform {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 90px;
+        height: 18px;
+        background: #8a6849;
+      }
+      .toolbox {
+        position: absolute;
+        left: 50%;
+        top: 103px;
+        width: 55px;
+        height: 35px;
+        background: #c9a42d;
+        border: 3px solid #8d721d;
+        z-index: 4;
+      }
+      .guardrail-missing {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 42px;
+        height: 8px;
+        background: linear-gradient(
+          90deg,
+          #4c5e55 0 35%,
+          transparent 35% 72%,
+          #4c5e55 72%
+        );
+        z-index: 4;
+      }
+      .warning-cone {
+        position: absolute;
+        left: 30%;
+        bottom: 74px;
+        width: 0;
+        height: 0;
+        border-left: 24px solid transparent;
+        border-right: 24px solid transparent;
+        border-bottom: 70px solid #d8781a;
+        z-index: 3;
+      }
+      .ht1 {
+        left: 17%;
+        bottom: 100px;
+      }
+      .ht2 {
+        right: 22%;
+        top: 86px;
+      }
+      .ht3 {
+        left: 55%;
+        top: 120px;
+      }
+      .ht4 {
+        left: 49%;
+        top: 200px;
+      }
+
+      .quiz {
+        max-width: 760px;
+        margin: auto;
+      }
+      .progress {
+        height: 8px;
+        background: #edf1ee;
+        border-radius: 999px;
+        overflow: hidden;
+        margin: 8px 0 24px;
+      }
+      .progress span {
+        display: block;
+        height: 100%;
+        background: var(--g2);
+      }
+      .option {
+        display: block;
+        width: 100%;
+        text-align: left;
+        margin: 10px 0;
+        background: white;
+        border: 1px solid var(--line);
+        transition: 0.15s;
+      }
+      .option:hover {
+        border-color: #7daa96;
+        background: #f4f9f6;
+      }
+      .option.selected {
+        border-color: var(--g);
+        background: #edf6f0;
+      }
+      .quiznav {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .result {
+        text-align: center;
+        padding: 45px;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+      }
+      .big {
+        font-size: 4rem;
+        color: var(--g);
+        font-weight: 900;
+      }
+      .result-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        max-width: 720px;
+        margin: 24px auto;
+      }
+      .result-stat {
+        background: #f5f8f6;
+        border: 1px solid var(--line);
+        padding: 15px;
+        border-radius: 14px;
+      }
+      .result-stat span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+      .result-stat b {
+        display: block;
+        margin-top: 4px;
+      }
+      .module-complete {
+        background: #eaf6ee;
+        border: 1px solid #cce6d4;
+        color: #2e704b;
+        padding: 13px;
+        border-radius: 12px;
+        max-width: 720px;
+        margin: 20px auto;
+      }
+      .reward {
+        max-width: 720px;
+        margin: 18px auto;
+        padding: 20px;
+        border: 1px solid #d8e4de;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #f8fbf9, #edf6f0);
+        text-align: left;
+      }
+      .reward.unlocked {
+        border-color: #dbc16e;
+        background: linear-gradient(135deg, #fffdf5, #f2f8f3);
+      }
+      .reward h3 {
+        margin: 0 0 6px;
+        color: var(--g);
+      }
+      .reward p {
+        margin: 0 0 12px;
+      }
+      .reward-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 11px;
+        padding: 13px 20px;
+        background: var(--r);
+        color: white;
+        font-weight: 800;
+        text-decoration: none;
+      }
+      .reward-link:hover {
+        background: #891032;
+      }
+      .backline {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .module-summary {
+        background: #f2f7f4;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px;
+        margin-top: 18px;
+      }
+      .module-summary strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .footer-note {
+        margin-top: 42px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+        font-size: 0.82rem;
+        color: #7b8981;
+      }
+      @media (max-width: 850px) {
+        .hero,
+        .grid,
+        .brief-grid {
+          grid-template-columns: 1fr;
+        }
+        .scene {
+          height: 420px;
+        }
+        .result-grid {
+          grid-template-columns: 1fr;
+        }
+        header {
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <img src="laliguras_logo.png" alt="Laliguras logo" />
+        <div class="brand-text">Laliguras <span>| SafeStep</span></div>
+      </div>
+      <div class="header-right">
+        <button class="ghost" id="homeBtn" onclick="goLearnerDashboard()">
+          Learner Dashboard
+        </button>
+        <div class="score" id="scoreBox">
+          Score: <b id="score">0</b>% · Time: <b id="time">120</b>s
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="welcome" class="hero">
+        <div>
+          <div class="eyebrow">Interactive Health & Safety Training</div>
+          <h1>Spot the <span>Hazards.</span><br />Make Safer Choices.</h1>
+          <p>
+            SafeStep combines scenario-based practice with immediate safety
+            feedback and short knowledge checks. This prototype demonstrates two
+            complete interactive modules for the A7 client presentation.
+          </p>
+          <button class="primary" onclick="show('dashboard')">
+            Enter Training →
+          </button>
+        </div>
+        <div class="card">
+          <img
+            src="laliguras_logo.png"
+            alt="Laliguras logo"
+            style="
+              height: 78px;
+              width: auto;
+              display: block;
+              margin-bottom: 14px;
+            "
+          />
+          <span class="badge available">Prototype ready</span>
+          <h2>SafeStep Training Experience</h2>
+          <p>
+            The prototype is designed to show the proposed learner journey from
+            module selection to practical hazard identification, assessment and
+            result.
+          </p>
+          <div class="steps">
+            <div class="step">
+              <b>1</b
+              ><span
+                ><strong>Choose</strong><br />Select an available safety
+                module.</span
+              >
+            </div>
+            <div class="step">
+              <b>2</b
+              ><span
+                ><strong>Explore</strong><br />Inspect the simulated
+                workplace.</span
+              >
+            </div>
+            <div class="step">
+              <b>3</b
+              ><span
+                ><strong>Identify</strong><br />Select hazards and review
+                corrective actions.</span
+              >
+            </div>
+            <div class="step">
+              <b>4</b
+              ><span
+                ><strong>Assess</strong><br />Complete a short knowledge
+                check.</span
+              >
+            </div>
+            <div class="step">
+              <b>5</b
+              ><span
+                ><strong>Review</strong><br />Receive a clear score and learning
+                outcome.</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboard" class="hidden">
+        <div class="eyebrow">Training Dashboard</div>
+        <h1 style="font-size: 3rem">Choose your module</h1>
+        <p>
+          Two prototype modules are fully available. Fire Safety is
+          intentionally retained as a coming-soon module.
+        </p>
+
+        <div class="grid">
+          <div class="module">
+            <span class="badge available">Available</span>
+            <h3>📦 Warehouse Hazard Training</h3>
+            <p>
+              Manual-handling and warehouse risk-awareness training using an
+              interactive hazard-identification scene.
+            </p>
+            <div class="meta">
+              <span>4 hazards</span><span>3 questions</span
+              ><span>120 sec scenario</span>
+            </div>
+            <div class="module-actions">
+              <button class="primary" onclick="openModule('warehouse')">
+                Start Module
+              </button>
+            </div>
+          </div>
+
+          <div class="module">
+            <span class="badge available">Available</span>
+            <h3>🪜 Working at Height</h3>
+            <p>
+              Complete fall-prevention training covering ladder setup, open
+              edges, scaffold controls and falling-object risks.
+            </p>
+            <div class="meta">
+              <span>4 hazards</span><span>3 questions</span
+              ><span>120 sec scenario</span>
+            </div>
+            <div class="module-actions">
+              <button class="primary" onclick="openModule('height')">
+                Start Module
+              </button>
+            </div>
+          </div>
+
+          <div class="module">
+            <span class="badge soon">Coming Soon</span>
+            <h3>🔥 Fire Safety</h3>
+            <p>
+              Fire prevention, alarm response, evacuation and
+              extinguisher-awareness training.
+            </p>
+            <div class="meta">
+              <span>Planned module</span><span>Scenario design pending</span>
+            </div>
+            <div class="module-actions">
+              <button class="secondary" disabled>Coming Soon</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-summary">
+          <strong>Prototype scope</strong>
+          <p>
+            This A7 demonstration contains complete interactive journeys for
+            Warehouse Hazard Training and Working at Height. Fire Safety is
+            shown only as a future module and cannot be launched.
+          </p>
+        </div>
+      </section>
+
+      <section id="brief" class="hidden">
+        <div class="backline">
+          <button class="secondary" onclick="show('dashboard')">
+            ← Back to modules
+          </button>
+          <span class="badge available" id="briefBadge">Available</span>
+        </div>
+        <div class="brief-grid">
+          <div class="card">
+            <div class="eyebrow">Module Brief</div>
+            <h1 style="font-size: 3rem" id="briefTitle">
+              Warehouse Safety Scenario
+            </h1>
+            <p id="briefIntro"></p>
+            <div class="brief-list" id="briefList"></div>
+            <button class="primary" onclick="startScenario()">
+              Begin 360° Scenario →
+            </button>
+          </div>
+          <div class="card">
+            <div class="eyebrow">Learning outcome</div>
+            <h2 id="briefOutcomeTitle"></h2>
+            <p id="briefOutcome"></p>
+            <div class="notice">
+              <strong>Prototype note:</strong><br />
+              The visual scene is a browser-based simulation of the proposed
+              SafeStep interaction. It is not intended to replace site-specific
+              training or competent-person instruction.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scenePage" class="hidden">
+        <div class="backline">
+          <button class="secondary" onclick="show('brief')">
+            ← Module brief
+          </button>
+          <span class="badge available" id="sceneModuleBadge"></span>
+        </div>
+        <div class="scenebox">
+          <div class="scenehead">
+            <span
+              ><b id="sceneTitle">360° Training Scene</b><br /><small
+                id="sceneSubtitle"
+              ></small
+            ></span>
+            <b><span id="found">0</span> / 4 hazards identified</b>
+          </div>
+
+          <div class="scene warehouse-scene" id="warehouseScene">
+            <div class="scene-label">Warehouse · Manual Handling</div>
+            <div class="rack r1"></div>
+            <div class="rack r2"></div>
+            <div class="box b1"></div>
+            <div class="box b2"></div>
+            <div class="box b3"></div>
+            <div class="worker">
+              <div class="head"></div>
+              <div class="body"></div>
+              <div class="legs"></div>
+            </div>
+            <div class="spill"></div>
+            <div class="exit">EMERGENCY<br />EXIT</div>
+            <button
+              class="hot wh1"
+              data-hazard="warehouse-1"
+              onclick="hazard(this)"
+            >
+              1
+            </button>
+            <button
+              class="hot wh2"
+              data-hazard="warehouse-2"
+              onclick="hazard(this)"
+            >
+              2
+            </button>
+            <button
+              class="hot wh3"
+              data-hazard="warehouse-3"
+              onclick="hazard(this)"
+            >
+              3
+            </button>
+            <button
+              class="hot wh4"
+              data-hazard="warehouse-4"
+              onclick="hazard(this)"
+            >
+              4
+            </button>
+          </div>
+
+          <div class="scene height-scene hidden" id="heightScene">
+            <div class="scene-label">Working at Height · Fall Prevention</div>
+            <div class="building"></div>
+            <div class="roof"></div>
+            <div class="edge-worker">
+              <div class="head"></div>
+              <div class="body"></div>
+              <div class="legs"></div>
+            </div>
+
+            <div class="ladder">
+              <span class="rung" style="top: 20px"></span
+              ><span class="rung" style="top: 58px"></span>
+              <span class="rung" style="top: 96px"></span
+              ><span class="rung" style="top: 134px"></span>
+              <span class="rung" style="top: 172px"></span
+              ><span class="rung" style="top: 210px"></span>
+              <span class="rung" style="top: 248px"></span
+              ><span class="rung" style="top: 286px"></span>
+            </div>
+
+            <div class="scaffold">
+              <div class="guardrail-missing"></div>
+              <div class="platform"></div>
+              <div class="toolbox"></div>
+            </div>
+            <div class="warning-cone"></div>
+
+            <button
+              class="hot ht1"
+              data-hazard="height-1"
+              onclick="hazard(this)"
+            >
+              1
+            </button>
+            <button
+              class="hot ht2"
+              data-hazard="height-2"
+              onclick="hazard(this)"
+            >
+              2
+            </button>
+            <button
+              class="hot ht3"
+              data-hazard="height-3"
+              onclick="hazard(this)"
+            >
+              3
+            </button>
+            <button
+              class="hot ht4"
+              data-hazard="height-4"
+              onclick="hazard(this)"
+            >
+              4
+            </button>
+          </div>
+
+          <div class="controls">
+            <button class="control" onclick="turn(-1)">← Look Left</button>
+            <button class="control" onclick="turn(1)">Look Right →</button>
+            <button class="control" onclick="resetView()">Reset View</button>
+            <button class="control" onclick="showHint()">Show Hint</button>
+          </div>
+          <div class="feedback" id="feedback">
+            Select each red hotspot and review the safety feedback.
+          </div>
+        </div>
+      </section>
+
+      <section id="quiz" class="hidden">
+        <div class="backline">
+          <button class="secondary" onclick="show('scenePage')">
+            ← Back to scenario
+          </button>
+          <span class="badge available" id="quizBadge"></span>
+        </div>
+        <div class="quiz card">
+          <div class="eyebrow">Knowledge Check</div>
+          <h2 id="quizModuleTitle"></h2>
+          <p id="qCounter"></p>
+          <div class="progress">
+            <span id="qProgress" style="width: 33%"></span>
+          </div>
+          <h3 id="question"></h3>
+          <div id="options"></div>
+          <div class="quiznav">
+            <button class="secondary" id="prevBtn" onclick="prevQuestion()">
+              Previous
+            </button>
+            <button class="primary" id="nextBtn" onclick="nextQuestion()">
+              Next Question
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="result" class="hidden">
+        <div class="result">
+          <div class="eyebrow">Training Complete</div>
+          <h1 style="font-size: 3rem" id="resultTitle">Module complete</h1>
+          <p id="resultLead"></p>
+
+          <div class="big"><span id="final">0</span>%</div>
+
+          <div class="result-grid">
+            <div class="result-stat">
+              <span>Module</span><b id="resultModule"></b>
+            </div>
+            <div class="result-stat">
+              <span>Hazards identified</span><b>4 / 4</b>
+            </div>
+            <div class="result-stat">
+              <span>Knowledge check</span><b id="quizResult"></b>
+            </div>
+          </div>
+
+          <div id="completionMessage" class="module-complete"></div>
+          <p id="resultText"></p>
+
+          <div class="reward" id="certificateReward">
+            <h3 id="rewardTitle">Certificate progress</h3>
+            <p id="rewardText"></p>
+            <a
+              class="reward-link"
+              id="rewardLink"
+              href="../../../dashboard.html"
+              >View learner dashboard →</a
+            >
+          </div>
+
+          <div
+            style="
+              display: flex;
+              gap: 10px;
+              justify-content: center;
+              flex-wrap: wrap;
+            "
+          >
+            <button class="primary" onclick="restartCurrent()">
+              Repeat Module
+            </button>
+            <button class="secondary" onclick="goDashboard()">
+              Choose Another Module
+            </button>
+            <button class="secondary" onclick="goLearnerDashboard()">
+              Learner Dashboard
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-note">
+        SafeStep academic prototype for CET257 A7 client presentation. Prototype
+        learning content is illustrative and should not be represented as
+        accredited or site-specific safety instruction.
+      </div>
+    </main>
+
+    <script>
+      const moduleData = {
+        warehouse: {
+          name: "Warehouse Hazard Training",
+          short: "Warehouse · Manual Handling",
+          briefTitle: "Warehouse Safety Scenario",
+          intro:
+            "Your task is to inspect a simulated warehouse and identify four hazards before the timer reaches zero. The scenario focuses on manual handling, safe access, storage and emergency routes.",
+          outcomeTitle: "Recognise common warehouse hazards",
+          outcome:
+            "By the end of this module, the learner should be able to identify unsafe conditions, understand why they matter and choose an appropriate corrective response.",
+          bullets: [
+            "Find all four hazards in the simulated warehouse.",
+            "Review immediate feedback for every hazard.",
+            "Use the look controls to inspect the scene.",
+            "Complete the three-question knowledge check.",
+          ],
+          hints:
+            "Check the walking route, worker posture, emergency exit area and storage rack.",
+          hazards: {
+            "warehouse-1":
+              "Slip hazard: liquid has been left on the walking route. Isolate the area and arrange safe clean-up before normal access resumes.",
+            "warehouse-2":
+              "Manual-handling hazard: the worker is lifting with an unsafe posture. Assess the load, keep it close, avoid twisting and use assistance or handling equipment where required.",
+            "warehouse-3":
+              "Emergency-exit hazard: the exit route must remain clear and accessible so evacuation is not obstructed.",
+            "warehouse-4":
+              "Storage hazard: boxes are stacked unsafely and could fall. Re-stack items securely within the designated storage area.",
+          },
+          questions: [
+            {
+              q: "What should you do before lifting or moving a load?",
+              options: [
+                "Lift it immediately to save time",
+                "Assess the task, load, route and need for assistance",
+                "Twist your body to face the destination",
+                "Carry it away from your body",
+              ],
+              correct: 1,
+            },
+            {
+              q: "Why must an emergency exit route remain clear?",
+              options: [
+                "To improve the appearance of the workplace",
+                "To reduce lighting costs",
+                "To allow safe evacuation without obstruction",
+                "Only because visitors may use it",
+              ],
+              correct: 2,
+            },
+            {
+              q: "What is the correct response to a liquid spill on a walking route?",
+              options: [
+                "Ignore it if nobody has fallen",
+                "Walk around it and leave it for later",
+                "Isolate the area and follow the appropriate spill-control procedure",
+                "Cover it with cardboard",
+              ],
+              correct: 2,
+            },
+          ],
+        },
+        height: {
+          name: "Working at Height",
+          short: "Working at Height · Fall Prevention",
+          briefTitle: "Working at Height Safety Scenario",
+          intro:
+            "Inspect a simulated work-at-height area and identify four hazards related to ladder use, unprotected edges, incomplete scaffold protection and unsecured materials.",
+          outcomeTitle: "Recognise fall and falling-object risks",
+          outcome:
+            "By the end of this module, the learner should be able to recognise common work-at-height hazards and identify safer controls before work begins.",
+          bullets: [
+            "Identify the four work-at-height hazards.",
+            "Review the safer corrective action for each hazard.",
+            "Use the scene controls to inspect the area.",
+            "Complete the three-question knowledge check.",
+          ],
+          hints:
+            "Look at the ladder base, the roof edge, scaffold edge protection and objects stored on the elevated platform.",
+          hazards: {
+            "height-1":
+              "Ladder hazard: the ladder is not shown as secured and is positioned on an unsuitable base. A ladder should be checked, correctly positioned and secured before use.",
+            "height-2":
+              "Open-edge hazard: the worker is close to an exposed roof edge without visible edge protection or an appropriate fall-protection system. Work should not continue until effective controls are in place.",
+            "height-3":
+              "Falling-object hazard: tools or materials are unsecured on an elevated platform. Secure items and control the area below to prevent dropped-object injuries.",
+            "height-4":
+              "Scaffold hazard: edge protection is incomplete. A suitable working platform should have the required guardrails and other protective measures before use.",
+          },
+          questions: [
+            {
+              q: "What should happen before work at height begins?",
+              options: [
+                "Start quickly before conditions change",
+                "Assess the task and select suitable fall-prevention controls",
+                "Use any ladder that is nearby",
+                "Rely only on worker experience",
+              ],
+              correct: 1,
+            },
+            {
+              q: "What is an important ladder-safety check?",
+              options: [
+                "Confirm it is suitable, stable and secured for the task",
+                "Place it on loose materials to increase height",
+                "Lean sideways instead of repositioning it",
+                "Use a damaged ladder if the task is short",
+              ],
+              correct: 0,
+            },
+            {
+              q: "Why should tools and materials be secured on an elevated platform?",
+              options: [
+                "To keep the platform looking tidy",
+                "To reduce the risk of objects falling and injuring people below",
+                "Only to make counting equipment easier",
+                "Because unsecured tools always damage the platform",
+              ],
+              correct: 1,
+            },
+          ],
+        },
+      };
+
+      let currentModule = "warehouse";
+      let score = 0,
+        found = 0,
+        time = 120,
+        timer = null,
+        rotation = 0;
+      let currentQuestion = 0;
+      let selectedAnswers = [null, null, null];
+      let quizCorrect = 0;
+      let activityStartedAt = Date.now();
+
+      function getSession() {
+        try {
+          return JSON.parse(localStorage.getItem("safestepSession"));
+        } catch {
+          return null;
+        }
+      }
+      function getSavedProgress(userId) {
+        const blank = {
+          warehouse: {
+            complete: false,
+            percent: 0,
+            completedAt: null,
+            seconds: 0,
+          },
+          height: {
+            complete: false,
+            percent: 0,
+            completedAt: null,
+            seconds: 0,
+          },
+        };
+        try {
+          const saved =
+            JSON.parse(localStorage.getItem("safestepProgress:" + userId)) ||
+            {};
+          return {
+            warehouse: { ...blank.warehouse, ...(saved.warehouse || {}) },
+            height: { ...blank.height, ...(saved.height || {}) },
+          };
+        } catch {
+          return blank;
+        }
+      }
+      function scorePercent() {
+        return Math.round((score / 70) * 100);
+      }
+      function updateScoreDisplay() {
+        document.getElementById("score").textContent = scorePercent();
+      }
+      function goLearnerDashboard() {
+        window.top.location.href = "../../../dashboard.html";
+      }
+      function saveModuleResult(percent, pass) {
+        const session = getSession();
+        if (!session || session.role !== "learner")
+          return { saved: false, completeCount: 0 };
+        const progress = getSavedProgress(session.id);
+        const previous = progress[currentModule];
+        progress[currentModule] = {
+          complete: previous.complete || pass,
+          percent: Math.max(Number(previous.percent || 0), percent),
+          completedAt: pass
+            ? new Date().toISOString()
+            : previous.completedAt || new Date().toISOString(),
+          seconds:
+            Number(previous.seconds || 0) +
+            Math.max(1, Math.round((Date.now() - activityStartedAt) / 1000)),
+        };
+        localStorage.setItem(
+          "safestepProgress:" + session.id,
+          JSON.stringify(progress),
+        );
+        return {
+          saved: true,
+          completeCount: [progress.warehouse, progress.height].filter(
+            (item) => item.complete,
+          ).length,
+        };
+      }
+
+      function show(id) {
+        document
+          .querySelectorAll("main>section")
+          .forEach((x) => x.classList.add("hidden"));
+        document.getElementById(id).classList.remove("hidden");
+        window.scrollTo(0, 0);
+      }
+      function goDashboard() {
+        stopTimer();
+        show("dashboard");
+        resetHeader();
+      }
+      function resetHeader() {
+        document.getElementById("score").textContent = 0;
+        document.getElementById("time").textContent = 120;
+      }
+      function openModule(id) {
+        currentModule = id;
+        score = 0;
+        found = 0;
+        time = 120;
+        rotation = 0;
+        currentQuestion = 0;
+        selectedAnswers = [null, null, null];
+        quizCorrect = 0;
+        updateScoreDisplay();
+        document.getElementById("time").textContent = time;
+        populateBrief();
+        show("brief");
+      }
+      function populateBrief() {
+        const d = moduleData[currentModule];
+        document.getElementById("briefTitle").textContent = d.briefTitle;
+        document.getElementById("briefIntro").textContent = d.intro;
+        document.getElementById("briefOutcomeTitle").textContent =
+          d.outcomeTitle;
+        document.getElementById("briefOutcome").textContent = d.outcome;
+        document.getElementById("briefList").innerHTML = d.bullets
+          .map(
+            (x, i) =>
+              `<div class="brief-item"><i>${i + 1}</i><span>${x}</span></div>`,
+          )
+          .join("");
+      }
+      function startScenario() {
+        score = 0;
+        found = 0;
+        time = 120;
+        rotation = 0;
+        currentQuestion = 0;
+        selectedAnswers = [null, null, null];
+        quizCorrect = 0;
+        activityStartedAt = Date.now();
+        document.querySelectorAll(".hot").forEach((x) => {
+          x.classList.remove("done");
+          x.disabled = false;
+          x.dataset.done = "";
+        });
+        updateScoreDisplay();
+        document.getElementById("time").textContent = time;
+        document.getElementById("found").textContent = found;
+        document.getElementById("feedback").textContent =
+          "Select each red hotspot and review the safety feedback.";
+        document
+          .getElementById("warehouseScene")
+          .classList.toggle("hidden", currentModule !== "warehouse");
+        document
+          .getElementById("heightScene")
+          .classList.toggle("hidden", currentModule !== "height");
+        document.getElementById("sceneModuleBadge").textContent =
+          moduleData[currentModule].name;
+        document.getElementById("sceneTitle").textContent =
+          "360° Training Scene";
+        document.getElementById("sceneSubtitle").textContent =
+          moduleData[currentModule].short;
+        resetView();
+        show("scenePage");
+        stopTimer();
+        timer = setInterval(() => {
+          time--;
+          document.getElementById("time").textContent = time;
+          if (time <= 0) {
+            stopTimer();
+            beginQuiz();
+          }
+        }, 1000);
+      }
+      function stopTimer() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+      function hazard(el) {
+        if (el.dataset.done) return;
+        const key = el.dataset.hazard;
+        if (!key.startsWith(currentModule)) return;
+        el.dataset.done = 1;
+        el.classList.add("done");
+        el.disabled = true;
+        found++;
+        score += 10;
+        updateScoreDisplay();
+        document.getElementById("found").textContent = found;
+        document.getElementById("feedback").textContent =
+          "✓ Hazard identified — " + moduleData[currentModule].hazards[key];
+        if (found === 4) {
+          stopTimer();
+          setTimeout(beginQuiz, 850);
+        }
+      }
+      function turn(d) {
+        rotation += d * 8;
+        const scene =
+          currentModule === "warehouse"
+            ? document.getElementById("warehouseScene")
+            : document.getElementById("heightScene");
+        scene.style.transform =
+          "perspective(900px) rotateY(" + rotation + "deg)";
+      }
+      function resetView() {
+        rotation = 0;
+        document.getElementById("warehouseScene").style.transform = "none";
+        document.getElementById("heightScene").style.transform = "none";
+      }
+      function showHint() {
+        document.getElementById("feedback").textContent =
+          "Hint — " + moduleData[currentModule].hints;
+      }
+      function beginQuiz() {
+        stopTimer();
+        currentQuestion = 0;
+        selectedAnswers = [null, null, null];
+        quizCorrect = 0;
+        document.getElementById("quizBadge").textContent =
+          moduleData[currentModule].name;
+        document.getElementById("quizModuleTitle").textContent =
+          moduleData[currentModule].name;
+        renderQuestion();
+        show("quiz");
+      }
+      function renderQuestion() {
+        const qs = moduleData[currentModule].questions;
+        const q = qs[currentQuestion];
+        document.getElementById("qCounter").textContent =
+          `Question ${currentQuestion + 1} of ${qs.length}`;
+        document.getElementById("qProgress").style.width =
+          ((currentQuestion + 1) / qs.length) * 100 + "%";
+        document.getElementById("question").textContent = q.q;
+        document.getElementById("options").innerHTML = q.options
+          .map(
+            (o, i) =>
+              `<button class="option ${selectedAnswers[currentQuestion] === i ? "selected" : ""}" onclick="selectAnswer(${i})">${String.fromCharCode(65 + i)}. ${o}</button>`,
+          )
+          .join("");
+        document.getElementById("prevBtn").disabled = currentQuestion === 0;
+        document.getElementById("nextBtn").textContent =
+          currentQuestion === qs.length - 1
+            ? "Submit Assessment"
+            : "Next Question";
+      }
+      function selectAnswer(i) {
+        selectedAnswers[currentQuestion] = i;
+        renderQuestion();
+      }
+      function nextQuestion() {
+        if (selectedAnswers[currentQuestion] === null) {
+          alert("Please choose an answer before continuing.");
+          return;
+        }
+        const qs = moduleData[currentModule].questions;
+        if (currentQuestion < qs.length - 1) {
+          currentQuestion++;
+          renderQuestion();
+        } else {
+          finishModule();
+        }
+      }
+      function prevQuestion() {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          renderQuestion();
+        }
+      }
+      function finishModule() {
+        quizCorrect = 0;
+        moduleData[currentModule].questions.forEach((q, i) => {
+          if (selectedAnswers[i] === q.correct) quizCorrect++;
+        });
+        score += quizCorrect * 10;
+        const percent = scorePercent();
+        updateScoreDisplay();
+        document.getElementById("final").textContent = percent;
+        document.getElementById("resultModule").textContent =
+          moduleData[currentModule].name;
+        document.getElementById("quizResult").textContent =
+          `${quizCorrect} / 3 correct`;
+        const pass = score >= 50;
+        const saved = saveModuleResult(percent, pass);
+        document.getElementById("resultTitle").textContent = pass
+          ? "Module completed successfully"
+          : "Review recommended";
+        document.getElementById("resultLead").textContent = pass
+          ? `You completed the ${moduleData[currentModule].name} prototype journey.`
+          : `You completed the activity, but your result indicates that some learning points should be reviewed.`;
+        document.getElementById("completionMessage").textContent = pass
+          ? "✓ Prototype completion achieved. The learner has identified all scene hazards and met the assessment threshold."
+          : "Review the scenario feedback and repeat the module before treating the learning journey as complete.";
+        document.getElementById("resultText").textContent =
+          score >= 60
+            ? "Strong performance. You identified the hazards and demonstrated a good understanding of the recommended safety controls."
+            : pass
+              ? "Pass achieved. Review the feedback to reinforce the safer decisions demonstrated in the scenario."
+              : "Good attempt. Repeat the module after reviewing the hazard explanations and knowledge-check questions.";
+        const reward = document.getElementById("certificateReward");
+        const rewardTitle = document.getElementById("rewardTitle");
+        const rewardText = document.getElementById("rewardText");
+        const rewardLink = document.getElementById("rewardLink");
+        reward.classList.toggle("unlocked", saved.completeCount === 2);
+        if (!saved.saved) {
+          rewardTitle.textContent = "Sign in to save this result";
+          rewardText.textContent =
+            "Your percentage is ready. Sign in as a learner to track both activities and unlock the certificate.";
+          rewardLink.textContent = "Sign in to learner portal →";
+          rewardLink.href = "../../../login.html";
+        } else if (saved.completeCount === 2) {
+          rewardTitle.textContent = "🏆 Certificate unlocked";
+          rewardText.textContent =
+            "Congratulations! You have passed both SafeStep safety activities. Your reward certificate is ready.";
+          rewardLink.textContent = "View reward certificate →";
+          rewardLink.href = "../../../certificate.html";
+        } else {
+          rewardTitle.textContent = "1 of 2 activities complete";
+          rewardText.textContent =
+            "Complete the remaining safety activity to unlock your SafeStep reward certificate.";
+          rewardLink.textContent = "Continue from learner dashboard →";
+          rewardLink.href = "../../../dashboard.html";
+        }
+        show("result");
+      }
+      function restartCurrent() {
+        openModule(currentModule);
+      }
+      const requestedModule = new URLSearchParams(location.search).get(
+        "module",
+      );
+      if (requestedModule === "warehouse" || requestedModule === "height")
+        openModule(requestedModule);
+      else show("welcome");
+    </script>
+  </body>
+</html>
